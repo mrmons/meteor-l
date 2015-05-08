@@ -1,0 +1,55 @@
+<head>
+  <title>Meteor To Do</title>
+</head>
+
+<body>
+	<div class="container">
+		<header id="header" class="">
+			<h1>Meteor To Do List</h1>
+
+			<h1>Todo List ({{incompleteCount}})</h1>
+
+			<label class="hide-completed">
+			  <input type="checkbox" checked="{{hideCompleted}}" />
+			  Hide Completed Tasks
+			</label>
+
+			{{#if isOwner}}
+			  <button class="toggle-private">
+			    {{#if private}}
+			      Private
+			    {{else}}
+			      Public
+			    {{/if}}
+			  </button>
+			{{/if}}
+			
+
+			{{> loginButtons}}
+
+			{{#if currentUser}}
+			<form class="new-task">
+				<input type="text" name="text" placeholder="Type to add new tasks" />
+			</form>
+			{{/if}}
+
+			<ul>
+				{{#each tasks}}
+					{{> task}}
+				{{/each}}
+			</ul>
+		</header><!-- /header -->
+	</div>
+
+</body>
+
+<template name="task">
+
+	<li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+		<button class="delete">&times;</button>
+
+		<input type="checkbox" checked="{{checked}}" class="toggle-checked">
+
+		<span class="text"><strong>{{username}}</strong> - {{text}}</span>
+	</li>
+</template>
